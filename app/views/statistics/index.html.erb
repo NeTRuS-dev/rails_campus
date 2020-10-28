@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+  <tr>
+    <td>ФИО</td>
+    <td>Навыки</td>
+    <td>Предмет</td>
+    <td>Оценка</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @students.each do |user| %>
+    <% user.student_info.marks.each do |mark| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.skills.reduce '' do |str, skill|
+          str = if str.present?
+                  str + ', '
+                else
+                  ''
+                end
+          str + skill.name
+        end
+        %></td>
+        <td><%= mark.subject.name %></td>
+        <td><%= mark.value %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Средние оценки', statistics_average_path %>

@@ -1,0 +1,66 @@
+<% content_for :scripts_block do %>
+  <%= javascript_pack_tag :bootstrap_script %>
+  <%= stylesheet_pack_tag :bootstrap_script %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 justify-content-center">
+      <h2>Регистрация</h2>
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label "Адрес электронной почты" %><br/>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field">
+          <%= f.label "Пароль" %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br/>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.label "Повторите пароль" %><br/>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="field">
+          <%= f.label "Имя" %><br/>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label "Фамилия" %><br/>
+          <%= f.text_field :surname %>
+        </div>
+        <div class="field">
+          <%= f.label "Отчество" %><br/>
+          <%= f.text_field :patronymic %>
+        </div>
+        <div class="field">
+          <%= f.label "Дата рождения" %><br/>
+          <%= f.date_field :birth_date %>
+        </div>
+        <div class="field">
+          <%= f.label "Роль" %><br/>
+          <%= f.select :role, User::ROLE_NAMES.map { |k, v| [v, k] } %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Зарегистрировать", class:'btn btn-primary my-3' %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

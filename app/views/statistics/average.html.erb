@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+  <tr>
+    <td>ФИО</td>
+    <td>Предмет</td>
+    <td>Средняя оценка</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @students.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.subject_name %></td>
+        <td><%= user.avg_marks_value %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Общие сведения', statistics_index_path %>

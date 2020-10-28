@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center">
+      <%= link_to 'Подобрать вакансии', students_vacancies_path(find_for_me: true), class: 'btn btn-success' %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= form_with model: @search_form, method: :post, local: true, url: students_vacancies_path do |form| %>
+        <div class="field">
+          <%= form.label "Название вакансии" %><br/>
+          <%= form.text_field :title %>
+        </div>
+        <div class="field">
+          <%= form.label "Ключевые слова (разделяя запятой)" %><br/>
+          <%= form.text_area :key_words %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Желаемая зарплата" %><br/>
+          <%= form.number_field :wage %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Должность" %><br/>
+          <%= form.text_field :position %>
+        </div>
+
+        <%= form.submit 'Поиск', class: "btn btn-primary mt-2"%>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <% if @vacancies.any? %>
+        <table>
+          <thead>
+            <tr>
+              <th>Название вакансии</th>
+              <th>Описание вакансии</th>
+              <th>Предлагаемая зарплата</th>
+              <th>Должность</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @vacancies.each do |vacancy| %>
+              <tr>
+                <td><%= vacancy.title %></td>
+                <td><%= vacancy.description %></td>
+                <td><%= vacancy.wage %></td>
+                <td><%= vacancy.position %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <h2>Ничего не найдено</h2>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center">
+      <% if specialties.present? %>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Название</th>
+            <th>Шифр</th>
+            <th>Тип обучения</th>
+            <th>Количество учебных лет</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% specialties.each do |item| %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.code %></td>
+              <td><%= item.humanized_education_type %></td>
+              <td><%= item.max_courses %></td>
+              <td><%= link_to 'Удалить', managers_delete_specialty_path(specialty_id: item.id), method: :delete %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <%= form_with model: specialty_model, method: :post, local: true, url: managers_create_specialty_path do |form| %>
+        <div class="field">
+          <%= form.label "Название" %><br/>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label "Шифр" %><br/>
+          <%= form.text_field :code %>
+        </div>
+        <div class="field">
+          <%= form.label "Форма обучения" %><br/>
+          <%= form.select :education_type, Specialty::EDUCATION_TYPES.map { |k, v| [v, k] } %>
+        </div>
+        <div class="field">
+          <%= form.label "Срок обучения (лет)" %><br/>
+          <%= form.number_field :max_courses %>
+        </div>
+        <%= form.submit "Добавить", class: "btn btn-primary mt-2" %>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+

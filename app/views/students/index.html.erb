@@ -1,0 +1,68 @@
+<% content_for :scripts_block do %>
+  <%= javascript_pack_tag 'bootstrap_script' %>
+  <%= stylesheet_pack_tag 'bootstrap_script' %>
+<% end %>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <h1>Информация обо мне</h1>
+    </div>
+    <div class="col"><%= link_to 'Вакансии', students_vacancies_path, class: 'btn btn-info', style: 'color:white;' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= form_with model: @user, method: :post, local: true, url: students_index_path do |form| %>
+        <div class="field">
+          <%= form.label "Имя" %><br/>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label "Фамилия" %><br/>
+          <%= form.text_field :surname %>
+        </div>
+        <div class="field">
+          <%= form.label "Отчество" %><br/>
+          <%= form.text_field :patronymic %>
+        </div>
+        <div class="field">
+          <%= form.label "Дата рождения" %><br/>
+          <%= form.date_field :birth_date %>
+        </div>
+        <div class="field">
+          <%= form.label "Группа" %><br/>
+          <%= form.collection_select :group_id, @groups, :id, :name %>
+        </div>
+        <%= form.fields_for :student_info do |student_info_form| %>
+          <div class="field">
+            <%= form.label "О себе (в одном предложении)" %><br/>
+            <%= student_info_form.text_area :about_me %>
+          </div>
+          <div class="field">
+            <%= form.label "О себе (развернуто)" %><br/>
+            <%= student_info_form.text_area :full_about_me %>
+          </div>
+          <div class="field">
+            <%= form.label "Желаемая зарплата" %><br/>
+            <%= student_info_form.number_field :desired_wage %>
+          </div>
+          <div class="field">
+            <%= form.label "Контактный телефон" %><br/>
+            <%= student_info_form.text_field :contact_phone %>
+          </div>
+        <% end %>
+        <div class="field">
+          <%= form.label "Навыки (сферы деятельности)" %><br/>
+          <%= form.select :skill_ids, options_from_collection_for_select(Skill.all, :id, :name, @user.skill_ids), {}, class: 'item-with-select2', multiple: true %>
+        </div>
+        <div class="field">
+          <%= form.submit 'Сохранить', class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

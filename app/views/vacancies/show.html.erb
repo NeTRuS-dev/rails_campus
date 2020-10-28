@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center">
+      <p>
+        <strong>Название:</strong>
+        <%= @vacancy.title %>
+      </p>
+
+      <p>
+        <strong>Описание:</strong>
+        <%= truncate @vacancy.description, length: 100 %>
+      </p>
+
+      <p>
+        <strong>Предлагаемая зарплата:</strong>
+        <%= @vacancy.wage %>
+      </p>
+
+      <p>
+        <strong>Должность:</strong>
+        <%= @vacancy.position %>
+      </p>
+    </div>
+    <div class="col"></div>
+  </div>
+  <% if @matched_users.any? %>
+    <div class="row mt-2">
+      <div class="col"></div>
+      <div class="col-10 justify-content-center text-center">
+        <h2>Подходящие кандидатуры для вакансии</h2>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row mt-2">
+      <div class="col"></div>
+      <div class="col-10 d-flex flex-column justify-content-center">
+        <table class="table">
+          <thead>
+          <tr>
+            <td>ФИО</td>
+            <td>Дата рождения</td>
+            <td>Коротко о пользователе</td>
+            <td>Телефон для связи</td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @matched_users.each do |user| %>
+            <tr>
+              <td><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
+              <td><%= user.birth_date.to_s %></td>
+              <td><%= user.student_info.about_me %></td>
+              <td><%= user.student_info.contact_phone %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col"></div>
+    </div>
+  <% else %>
+    <div class="row mt-2">
+      <div class="col"></div>
+      <div class="col-10 justify-content-center text-center">
+        <h2>Подходящих пользователей не найдено</h2>
+      </div>
+      <div class="col"></div>
+    </div>
+  <% end %>
+</div>
+

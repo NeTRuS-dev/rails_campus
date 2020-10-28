@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center">
+      <% if groups.present? %>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Название группы</th>
+            <th>Номер группы</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% groups.each do |item| %>
+            <tr>
+              <td>
+                <%= item.name %>
+              </td>
+              <td>
+                <%= item.code %>
+              </td>
+              <td><%= link_to 'Удалить', managers_delete_group_path(group_id: item.id), method: :delete %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= form_with model: group_model, method: :post, url: managers_create_group_path do |form| %>
+        <div class="field">
+          <%= form.label "Название группы" %><br/>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label "Номер группы" %><br/>
+          <%= form.text_field :code %>
+        </div>
+        <%= form.submit "Добавить", class: "btn btn-primary mt-2" %><br/>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+

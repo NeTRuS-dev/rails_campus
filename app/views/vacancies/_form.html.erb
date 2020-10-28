@@ -1,0 +1,52 @@
+<% content_for :scripts_block do %>
+  <%= javascript_pack_tag :bootstrap_script %>
+  <%= stylesheet_pack_tag :bootstrap_script %>
+<% end %>
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= form_with(model: vacancy, local: true) do |form| %>
+        <% if vacancy.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+              <% vacancy.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label "Название вакансии" %><br/>
+          <%= form.text_field :title %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Описание вакансии" %><br/>
+          <%= form.text_area :description %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Предлагаемая зарплата" %><br/>
+          <%= form.number_field :wage %>
+        </div>
+
+        <div class="field">
+          <%= form.label "Должность" %><br/>
+          <%= form.text_field :position %>
+        </div>
+        <div class="field">
+          <%= form.label "Навыки (сферы деятельности)" %><br/>
+          <%= form.select :skill_ids, options_from_collection_for_select(Skill.all, :id, :name, vacancy.skill_ids), {}, class: 'item-with-select2', multiple: true %>
+
+        </div>
+        <div class="actions">
+          <%= form.submit "Сохранить", class: "btn btn-primary mt-2" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>

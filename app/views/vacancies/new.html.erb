@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <h1>Создание вакансии</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= render 'form', vacancy: @vacancy %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <%= link_to 'Вернуться', vacancies_path %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

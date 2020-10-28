@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <h1>Редактирование вакансии</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <%= render 'form', vacancy: @vacancy %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col d-flex flex-column justify-content-center text-center">
+      <%= link_to 'Вернуться к просмотру данной вакансии', @vacancy %>
+    </div>
+    <div class="col d-flex flex-column justify-content-center text-center">
+      <%= link_to 'Назад ко всем вакансиям', vacancies_path %>
+    </div>
+  </div>
+</div>

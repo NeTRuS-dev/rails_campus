@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <h1>Информация обо организации</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <%= link_to 'Вакансии', vacancies_path %>
+      <%= form_with model: @user, method: :post, local: true, url: employers_index_path do |form| %>
+        <div class="field">
+          <%= form.label "Имя" %><br/>
+          <%= form.text_field :name %>
+        </div>
+        <div class="field">
+          <%= form.label "Фамилия" %><br/>
+          <%= form.text_field :surname %>
+        </div>
+        <div class="field">
+          <%= form.label "Отчество" %><br/>
+          <%= form.text_field :patronymic %>
+        </div>
+        <div class="field">
+          <%= form.label "Дата рождения" %><br/>
+          <%= form.date_field :birth_date %>
+        </div>
+        <%= form.fields_for :employer_info do |student_info_form| %>
+          <div class="field">
+            <%= form.label "Название Вашей организации" %><br/>
+            <%= student_info_form.text_field :organization_name %>
+          </div>
+          <div class="field">
+            <%= form.label "Описание Вашей организации" %><br/>
+            <%= student_info_form.text_area :organization_description %>
+          </div>
+          <div class="field">
+            <%= form.label "Контаткный телефон" %><br/>
+            <%= student_info_form.text_field :contact_phone %>
+          </div>
+        <% end %>
+        <%= form.submit 'Сохранить', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<%= form_with(model: mark, local: true) do |form| %>
+  <% if mark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+        <% mark.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label 'Оценка' %>
+    <%= form.number_field :value %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Предмет' %>
+    <%= form.collection_select :subject_id, Subject.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'ФИО студента' %>
+    <%= form.select :student_info_id, StudentInfo.includes(:user).all.map { |student_info| [student_info.user.full_name, student_info.id] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Сохранить', class: 'btn btn-primary' %>
+  </div>
+<% end %>

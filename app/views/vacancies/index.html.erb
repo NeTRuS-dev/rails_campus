@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <h1>Список вакансий</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 d-flex flex-column justify-content-center text-center">
+      <table>
+        <thead>
+        <tr>
+          <th>Название вакансии</th>
+          <th>Описание вакансии</th>
+          <th>Предлагаемая зарплата</th>
+          <th>Должность</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @vacancies.each do |vacancy| %>
+          <tr>
+            <td><%= vacancy.title %></td>
+            <td><%= vacancy.description %></td>
+            <td><%= vacancy.wage %></td>
+            <td><%= vacancy.position %></td>
+            <td><%= link_to 'Подробнее', vacancy %></td>
+            <td><%= link_to 'Редактировать', edit_vacancy_path(vacancy) %></td>
+            <td><%= link_to 'Удалить', vacancy, method: :delete, data: { confirm: 'Вы действительно хотите удалить вакансию?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col"></div>
+    <div class="col-10 justify-content-center text-center">
+      <%= link_to 'Создать вакансию', new_vacancy_path %>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+
+
+
